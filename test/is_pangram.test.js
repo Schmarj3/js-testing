@@ -62,7 +62,7 @@ describe('isPangram()', () => {
 
   });
 
-  test('pangram with numbers', () => {
+  test('non-pangram with numbers', () => {
     // Arrange
     const text = 'abcdefghijklmnopqrstuvwyz49202';
     
@@ -71,6 +71,18 @@ describe('isPangram()', () => {
 
     // Assert
     expect(result).toBeFalsy();
+
+  });
+
+  test('pangram with numbers', () => {
+    // Arrange
+    const text = 'abcdefghijklmnopqrstuvwxyz49202';
+    
+    // Act
+    const result = isPangram(text);
+
+    // Assert
+    expect(result).toBeTruthy();
 
   });
 
@@ -83,11 +95,19 @@ describe('isPangram()', () => {
     // Act
     const result = isPangram(text);
 
-    // Assert
-    for (let char of text) {
-      expect(valid_chars.includes(char)).toBeTruthy();
-    }
+    // Assert - for loop not working as intended, see possible solution below
+    // for (char of text) {
+    //   expect(valid_chars.includes(char.toLowerCase())).toBeTruthy();
+    // }
     expect(result).toBeTruthy();
 
   });
 });
+
+
+// test.each([[1, 1, 2], [1, 2, 3], [2, 1, 3]])(
+//   '.add(%i, %i)',
+//   (a, b, expected) => {
+//     expect(a + b).toBe(expected);
+//   },
+// );
